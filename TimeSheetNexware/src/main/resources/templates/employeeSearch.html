@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>List Display</title>
+  
+  
+  
+  
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/> 
+​
+<style>
+​
+h1{
+text-align:center;
+}
+.wrapper {
+    text-align: center;
+}
+.button {
+    position: absolute;
+    top: 30%;
+    left: 40%;
+}
+​
+</style>
+​
+</head>
+<body>
+<h2 align="center">Report Screen</h2>
+<form method="POST" action="/userReport" th:object="${userInfo}">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+       <label>E_id:</label>
+       <input type="number" th:field="*{employeeId}" placeholder="employee_id">
+    </div>
+    <div class="col-sm-4">
+	<label>year:</label>
+     <input type="text" placeholder="year" th:field="*{year}" id="datepicker" />
+    </div>
+    <div class="col-sm-4">
+   <label>Month:</label>
+     <select th:field="*{month}">
+  <option value="january">January</option>
+  <option value="february">February</option>
+  <option value="march">March</option>
+  <option value="april">April</option>
+  <option value="may">May</option>
+  <option value="june">June</option>
+  <option value="july">July</option>
+  <option value="august">August</option>
+  <option value="september">September</option>
+  <option value="october">October</option>
+  <option value="november">November</option>
+  <option value="december">December</option>
+</select>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper">
+    <button type="submit" class="button">search</button>
+</div>
+</form>
+​
+</body>
+​
+<script>
+$("#datepicker").datepicker({
+    format: "yyyy",
+    viewMode: "years", 
+    minViewMode: "years"
+});
+$(".years").datetimepicker({
+    format: "yyyy",
+    startView: 'decade',
+    minView: 'decade',
+    viewSelect: 'decade',
+    autoclose: true,
+});
+​
+</script>
+</html>

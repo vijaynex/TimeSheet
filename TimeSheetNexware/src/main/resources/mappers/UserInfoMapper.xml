@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.timesheet.mappers.UserInfoMapper">
+	<resultMap id="UserResultMap" type="com.timesheet.model.UserInfo">
+		<id column="s_id" property="serialId" />
+		<result column="employee_id" property="employeeId" />
+		<result column="year" property="year" />
+		<result column="month" property="month" />
+		<result column="date" property="date" />
+		<result column="in_time" property="inTime" />
+		<result column="out_time" property="outTime" />
+		<result column="lunch_break" property="lunchTime" />
+		<result column="total_hours" property="totalHours" />
+		<result column="holiday" property="holiday" />
+		<result column="project_id" property="projectId" />
+		<result column="remarks" property="remarks" />
+	</resultMap>
+	<!-- <select id="findAllUsers" resultMap="UserResultMap"> -->
+	<!-- select id, name, email from users -->
+	<!-- </select> -->
+	<!-- <select id="findUserById" resultMap="UserResultMap"> -->
+	<!-- select id, name, email from users WHERE id=#{id} -->
+	<!-- </select> -->
+	<!-- <insert id="insertUser" parameterType="User" useGeneratedKeys="true" 
+		keyProperty="id"> -->
+	<!-- insert into users(name,email) values(#{name},#{email}) -->
+	<!-- </insert> -->
+	
+	<select id="findAll"  resultMap="UserResultMap">
+	 	select * from time_sheet;
+	</select>
+	
+	<insert id="insertUserInfoList" parameterType="java.util.List">
+			INSERT INTO time_sheet(employee_id,year,month,date,in_time,out_time,lunch_break,total_hours,holiday,project_id,remarks) values
+		<foreach collection="list" item="element" index="index" separator=",">
+			 (#{element.employeeId},#{element.year},#{element.month},#{element.date},#{element.inTime},#{element.outTime},
+			 #{element.lunchTime},#{element.totalHours},#{element.holiday},#{element.projectId},#{element.remarks})
+		</foreach>
+	</insert>
+	
+	<select id="getUserInfoListByEmployeeId"  resultMap="UserResultMap">
+	 	SELECT * 
+	 	FROM 
+	 		time_sheet 
+	 	where 
+	 		employee_id=#{employeeId} 
+	 		and year=#{year}  
+	 		and month=#{month};
+	</select>
+</mapper>
